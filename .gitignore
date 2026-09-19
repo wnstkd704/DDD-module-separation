@@ -1,0 +1,237 @@
+# Created by https://www.toptal.com/developers/gitignore/api/database,java,intellij+all,gradle
+# Edit at https://www.toptal.com/developers/gitignore?templates=database,java,intellij+all,gradle
+
+### Database ###
+*.accdb
+*.db
+*.dbf
+*.mdb
+*.pdb
+*.sqlite
+*.sqlite3
+*.db-shm
+*.db-wal
+
+### Intellij+all ###
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
+# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+
+# User-specific stuff
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+.idea/**/shelf
+
+# AWS User-specific
+.idea/**/aws.xml
+
+# Generated files
+.idea/**/contentModel.xml
+
+# Sensitive or high-churn files
+.idea/**/dataSources/
+.idea/**/dataSources.ids
+.idea/**/dataSources.local.xml
+.idea/**/sqlDataSources.xml
+.idea/**/dynamic.xml
+.idea/**/uiDesigner.xml
+.idea/**/dbnavigator.xml
+
+# Gradle
+.idea/**/gradle.xml
+.idea/**/libraries
+
+# Gradle and Maven with auto-import
+# When using Gradle or Maven with auto-import, you should exclude module files,
+# since they will be recreated, and may cause churn.  Uncomment if using
+# auto-import.
+# .idea/artifacts
+# .idea/compiler.xml
+# .idea/jarRepositories.xml
+# .idea/modules.xml
+# .idea/*.iml
+# .idea/modules
+# *.iml
+# *.ipr
+
+# CMake
+cmake-build-*/
+
+# Mongo Explorer plugin
+.idea/**/mongoSettings.xml
+
+# File-based project format
+*.iws
+
+# IntelliJ
+out/
+
+# mpeltonen/sbt-idea plugin
+.idea_modules/
+
+# JIRA plugin
+atlassian-ide-plugin.xml
+
+# Cursive Clojure plugin
+.idea/replstate.xml
+
+# SonarLint plugin
+.idea/sonarlint/
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+com_crashlytics_export_strings.xml
+crashlytics.properties
+crashlytics-build.properties
+fabric.properties
+
+# Editor-based Rest Client
+.idea/httpRequests
+
+# Android studio 3.1+ serialized cache file
+.idea/caches/build_file_checksums.ser
+
+### Intellij+all Patch ###
+# Ignore everything but code style settings and run configurations
+# that are supposed to be shared within teams.
+
+.idea/*
+
+!.idea/codeStyles
+!.idea/runConfigurations
+
+### Java ###
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+replay_pid*
+
+### Gradle ###
+.gradle
+**/build/
+!src/**/build/
+
+# Ignore Gradle GUI config
+gradle-app.setting
+
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
+
+# Avoid ignore Gradle wrappper properties
+!gradle-wrapper.properties
+
+# Cache of project
+.gradletasknamecache
+
+# Eclipse Gradle plugin generated files
+# Eclipse Core
+.project
+# JDT-specific (Eclipse Java Development Tools)
+.classpath
+
+### Gradle Patch ###
+# Java heap dump
+*.hprof
+
+# End of https://www.toptal.com/developers/gitignore/api/database,java,intellij+all,gradle
+
+### Custom ###
+
+# ---------- 비밀 정보 ----------
+# 환경변수 (예시 파일은 커밋)
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
+
+# Spring 로컬/비밀 설정
+application-local.yml
+application-local.properties
+application-secret.yml
+application-secret.properties
+application-local.yaml
+application-secret.yaml
+# 운영 설정을 저장소에 두지 않는다면 아래 주석을 해제
+# application-prod.yml
+# application-prod.properties
+
+# 인증서, 키, 자격 증명
+*.pem
+*.key
+*.jks
+*.p12
+*.pfx
+*.keystore
+*.crt
+id_rsa
+id_ed25519
+credentials.json
+service-account*.json
+*-firebase-adminsdk-*.json
+secrets/
+.secrets/
+
+# ---------- Docker ----------
+# 개인 환경용 compose 설정
+docker-compose.override.yml
+compose.override.yml
+
+# 볼륨으로 마운트되는 컨테이너 데이터 (compose의 volumes 경로에 맞게 수정)
+data/
+db_data/
+mysql-data/
+postgres-data/
+redis-data/
+mysql/
+postgres/
+redis/
+
+# ---------- 로그 / 업로드 / 덤프 ----------
+logs/
+log/
+uploads/
+*.hprof
+*.sql.gz
+
+# ---------- Spring / STS / Eclipse ----------
+HELP.md
+bin/
+.apt_generated
+.factorypath
+.settings/
+.springBeans
+.sts4-cache/
+.kotlin/
+
+# ---------- IDE 보완 ----------
+*.iml
+*.ipr
+.vscode/
+
+# ---------- OS ----------
+.DS_Store
+Thumbs.db
+Desktop.ini
+*~
+*.swp
