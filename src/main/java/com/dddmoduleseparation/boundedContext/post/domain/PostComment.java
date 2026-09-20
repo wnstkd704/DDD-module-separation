@@ -5,12 +5,14 @@ import com.dddmoduleseparation.boundedContext.member.domain.Member;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import static jakarta.persistence.FetchType.LAZY;
 
 @Entity
 @NoArgsConstructor
+@Getter
 public class PostComment extends BaseIdAndTime {
 
     @ManyToOne(fetch = LAZY)
