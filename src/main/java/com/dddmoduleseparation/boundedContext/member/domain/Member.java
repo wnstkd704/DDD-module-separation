@@ -3,12 +3,10 @@ package com.dddmoduleseparation.boundedContext.member.domain;
 import com.dddmoduleseparation.global.jpa.entity.BaseIdAndTime;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 @Entity
 @NoArgsConstructor
-@AllArgsConstructor
 public class Member extends BaseIdAndTime {
 
     @Column(unique = true)
@@ -17,4 +15,16 @@ public class Member extends BaseIdAndTime {
     private String password;
 
     private String ninkname;
+
+    private int activityScore;
+
+    public Member(String username, String password, String nickname) {
+        this.username = username;
+        this.password = password;
+        this.ninkname = nickname;
+    }
+
+    public int increaseActivityScore(int amount) {
+        return this.activityScore += amount;
+    }
 }
