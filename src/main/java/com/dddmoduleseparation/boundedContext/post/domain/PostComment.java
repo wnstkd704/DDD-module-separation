@@ -1,8 +1,7 @@
-package com.dddmoduleseparation.comment;
+package com.dddmoduleseparation.boundedContext.post.domain;
 
-import com.dddmoduleseparation.jpa.entity.BaseIdAndTime;
-import com.dddmoduleseparation.member.Member;
-import com.dddmoduleseparation.post.Post;
+import com.dddmoduleseparation.global.jpa.entity.BaseIdAndTime;
+import com.dddmoduleseparation.boundedContext.member.domain.Member;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
@@ -12,7 +11,7 @@ import static jakarta.persistence.FetchType.LAZY;
 
 @Entity
 @NoArgsConstructor
-public class Comment extends BaseIdAndTime {
+public class PostComment extends BaseIdAndTime {
 
     @ManyToOne(fetch = LAZY)
     private Post post;
@@ -20,10 +19,10 @@ public class Comment extends BaseIdAndTime {
     @ManyToOne(fetch = LAZY)
     private Member author;
 
-    @Column(columnDefinition = "LONGTEXT")
+    @Column(columnDefinition = "TEXT")
     private String content;
 
-    public Comment(Post post, Member author, String content) {
+    public PostComment(Post post, Member author, String content) {
         this.post = post;
         this.author = author;
         this.content = content;

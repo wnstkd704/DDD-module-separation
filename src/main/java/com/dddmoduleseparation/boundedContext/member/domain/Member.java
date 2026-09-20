@@ -1,6 +1,6 @@
-package com.dddmoduleseparation.member;
+package com.dddmoduleseparation.boundedContext.member.domain;
 
-import com.dddmoduleseparation.jpa.entity.BaseIdAndTime;
+import com.dddmoduleseparation.global.jpa.entity.BaseIdAndTime;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;

@@ -1,10 +1,9 @@
-package com.dddmoduleseparation.initData;
+package com.dddmoduleseparation.global.initData;
 
-import com.dddmoduleseparation.comment.CommentService;
-import com.dddmoduleseparation.member.Member;
-import com.dddmoduleseparation.member.MemberService;
-import com.dddmoduleseparation.post.Post;
-import com.dddmoduleseparation.post.PostService;
+import com.dddmoduleseparation.boundedContext.member.domain.Member;
+import com.dddmoduleseparation.boundedContext.member.app.MemberService;
+import com.dddmoduleseparation.boundedContext.post.domain.Post;
+import com.dddmoduleseparation.boundedContext.post.app.PostService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
@@ -18,13 +17,11 @@ public class DataInit {
     private final DataInit self;
     private final MemberService memberService;
     private final PostService postService;
-    private final CommentService commentService;
 
-    public DataInit(@Lazy DataInit self, MemberService memberService, PostService postService, CommentService commentService) {
+    public DataInit(@Lazy DataInit self, MemberService memberService, PostService postService) {
         this.self = self;
         this.memberService = memberService;
         this.postService = postService;
-        this.commentService = commentService;
     }
 
     @Bean
@@ -32,34 +29,35 @@ public class DataInit {
         return args -> {
             self.makeBaseMembers();
             self.makeBasePosts();
-            self.makeBaseComment();
         };
     }
 
     @Transactional
-    public void makeBaseComment() {
-        if (commentService.count() > 0) return;
-
+    public void makeBasePostComments() {
         Post post1 = postService.findById(1).get();
         Post post2 = postService.findById(2).get();
         Post post3 = postService.findById(3).get();
         Post post4 = postService.findById(4).get();
+        Post post5 = postService.findById(5).get();
+        Post post6 = postService.findById(6).get();
 
         Member user1Member = memberService.findByUsername("user1").get();
         Member user2Member = memberService.findByUsername("user2").get();
         Member user3Member = memberService.findByUsername("user3").get();
 
-        commentService.write(post1, user1Member, "댓글1");
-        commentService.write(post1, user2Member, "댓글2");
-        commentService.write(post1, user3Member, "댓글3");
+        if (post1.hasComments()) return;
 
-        commentService.write(post2, user2Member, "댓글4");
-        commentService.write(post2, user2Member, "댓글5");
+        post1.addComment(user1Member, "댓글1");
+        post1.addComment(user2Member, "댓글2");
+        post1.addComment(user3Member, "댓글3");
 
-        commentService.write(post3, user3Member, "댓글6");
-        commentService.write(post3, user3Member, "댓글7");
+        post2.addComment(user2Member, "댓글4");
+        post2.addComment(user2Member, "댓글5");
 
-        commentService.write(post4, user1Member, "댓글8");
+        post3.addComment(user3Member, "댓글6");
+        post3.addComment(user3Member, "댓글7");
+
+        post4.addComment(user1Member, "댓글8");
     }
 
     @Transactional

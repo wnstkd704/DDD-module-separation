@@ -1,4 +1,4 @@
-package com.dddmoduleseparation.jpa.entity;
+package com.dddmoduleseparation.global.jpa.entity;
 
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;

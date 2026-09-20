@@ -1,4 +1,4 @@
-package com.dddmoduleseparation.exception;
+package com.dddmoduleseparation.global.exception;
 
 import lombok.Getter;
 

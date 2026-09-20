@@ -1,6 +1,8 @@
-package com.dddmoduleseparation.post;
+package com.dddmoduleseparation.boundedContext.post.app;
 
-import com.dddmoduleseparation.member.Member;
+import com.dddmoduleseparation.boundedContext.member.domain.Member;
+import com.dddmoduleseparation.boundedContext.post.domain.Post;
+import com.dddmoduleseparation.boundedContext.post.out.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

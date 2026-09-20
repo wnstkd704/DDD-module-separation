@@ -1,6 +1,8 @@
-package com.dddmoduleseparation.member;
+package com.dddmoduleseparation.boundedContext.member.app;
 
-import com.dddmoduleseparation.exception.DomainException;
+import com.dddmoduleseparation.boundedContext.member.domain.Member;
+import com.dddmoduleseparation.boundedContext.member.out.MemberRepository;
+import com.dddmoduleseparation.global.exception.DomainException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
