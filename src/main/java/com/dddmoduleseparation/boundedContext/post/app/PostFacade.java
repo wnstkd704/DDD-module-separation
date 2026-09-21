@@ -2,9 +2,11 @@ package com.dddmoduleseparation.boundedContext.post.app;
 
 import com.dddmoduleseparation.boundedContext.member.domain.Member;
 import com.dddmoduleseparation.boundedContext.post.domain.Post;
+import com.dddmoduleseparation.boundedContext.post.domain.PostMember;
+import com.dddmoduleseparation.boundedContext.post.out.PostMemberRepository;
 import com.dddmoduleseparation.boundedContext.post.out.PostRepository;
-import com.dddmoduleseparation.global.eventPublisher.EventPublisher;
 import com.dddmoduleseparation.global.initData.RsData;
+import com.dddmoduleseparation.sharde.member.dto.MemberDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,8 +17,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class PostFacade {
     private final PostRepository postRepository;
-    private final PostWriteUseCase postJoinUseCase;
-    private final EventPublisher eventPublisher;
+    private final PostMemberRepository postMemberRepository;
+    private final PostWriteUseCase postWriteUseCase;
 
     @Transactional(readOnly = true)
     public long count() {
@@ -25,11 +27,26 @@ public class PostFacade {
 
     @Transactional
     public RsData<Post> write(Member author, String title, String content) {
-        return postJoinUseCase.write(author, title, content);
+        return postWriteUseCase.write(author, title, content);
     }
 
     @Transactional(readOnly = true)
     public Optional<Post> findById(int id) {
         return postRepository.findById(id);
+    }
+
+    @Transactional
+    public PostMember syncMember(MemberDto member) {
+        PostMember _member = new PostMember(
+                member.getUsername(),
+                "",
+                member.getNickname()
+        );
+
+        _member.setId(member.getId());
+        _member.setCreateDate(member.getCreateDate());
+        _member.setModifyDate(member.getModifyDate());
+
+        return postMemberRepository.save(_member);
     }
 }
