@@ -1,7 +1,9 @@
 package com.dddmoduleseparation.boundedContext.member.app;
 
 import com.dddmoduleseparation.boundedContext.member.domain.Member;
+import com.dddmoduleseparation.boundedContext.member.domain.MemberPolicy;
 import com.dddmoduleseparation.boundedContext.member.out.MemberRepository;
+import com.dddmoduleseparation.global.initData.RsData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +15,7 @@ import java.util.Optional;
 public class MemberFacade {
     private final MemberRepository memberRepository;
     private final MemberJoinUseCase memberJoinUseCase;
+    private final MemberPolicy memberPolicy;
 
     @Transactional(readOnly = true)
     public long count() {
@@ -20,7 +23,7 @@ public class MemberFacade {
     }
 
     @Transactional
-    public Member join(String username, String password, String nickname) {
+    public RsData<Member> join(String username, String password, String nickname) {
         return memberJoinUseCase.join(username, password, nickname);
     }
 
@@ -32,5 +35,10 @@ public class MemberFacade {
     @Transactional(readOnly = true)
     public Optional<Member> findById(int id) {
         return memberRepository.findById(id);
+    }
+
+    public String getRandomSecureTip() {
+        return "비밀번호의 유효기간은 %d일 입니다."
+                .formatted(memberPolicy.getNeedToChangePasswordDays());
     }
 }

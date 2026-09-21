@@ -4,25 +4,27 @@ import com.dddmoduleseparation.boundedContext.member.domain.Member;
 import com.dddmoduleseparation.boundedContext.post.domain.Post;
 import com.dddmoduleseparation.boundedContext.post.out.PostRepository;
 import com.dddmoduleseparation.global.eventPublisher.EventPublisher;
-import com.dddmoduleseparation.sharde.post.dto.PostDto;
-import com.dddmoduleseparation.sharde.post.event.PostCreatedEvent;
+import com.dddmoduleseparation.global.initData.RsData;
+import com.dddmoduleseparation.sharde.member.out.MemberApiClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class PostJoinUseCase {
+public class PostWriteUseCase {
     private final PostRepository postRepository;
     private final EventPublisher eventPublisher;
+    private final MemberApiClient memberApiClient;
 
-    public Post write(Member author, String title, String content) {
+    public RsData<Post> write(Member author, String title, String content) {
         Post post = postRepository.save(new Post(author, title, content));
+        String randomSecureTip = memberApiClient.getRandomSecureTip();
 
-        eventPublisher.publish(
-                new PostCreatedEvent(
-                        new PostDto(post)
-                )
+        return new RsData<>(
+                "201-1",
+                "%d번 글이 생성되었습니다. 보안 팁 : %s"
+                        .formatted(post.getId(), randomSecureTip),
+                post
         );
-        return post;
     }
 }
