@@ -1,6 +1,8 @@
 package com.dddmoduleseparation.boundedContext.member.domain;
 
 import com.dddmoduleseparation.sharde.member.domain.SourceMember;
+import com.dddmoduleseparation.sharde.member.dto.MemberDto;
+import com.dddmoduleseparation.sharde.member.event.MemberModifiedEvent;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -16,8 +18,13 @@ public class Member extends SourceMember {
     }
 
     public int increaseActivityScore(int amount) {
+        if (amount == 0) return getActivityScore();
+
         setActivityScore(getActivityScore() + amount);
 
+        publishEvent(
+                new MemberModifiedEvent(new MemberDto(this))
+        );
         return getActivityScore();
     }
 }

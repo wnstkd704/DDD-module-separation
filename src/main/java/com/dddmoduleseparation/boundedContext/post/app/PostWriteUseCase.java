@@ -1,7 +1,7 @@
 package com.dddmoduleseparation.boundedContext.post.app;
 
-import com.dddmoduleseparation.boundedContext.member.domain.Member;
 import com.dddmoduleseparation.boundedContext.post.domain.Post;
+import com.dddmoduleseparation.boundedContext.post.domain.PostMember;
 import com.dddmoduleseparation.boundedContext.post.out.PostRepository;
 import com.dddmoduleseparation.global.eventPublisher.EventPublisher;
 import com.dddmoduleseparation.global.initData.RsData;
@@ -16,7 +16,7 @@ public class PostWriteUseCase {
     private final EventPublisher eventPublisher;
     private final MemberApiClient memberApiClient;
 
-    public RsData<Post> write(Member author, String title, String content) {
+    public RsData<Post> write(PostMember author, String title, String content) {
         Post post = postRepository.save(new Post(author, title, content));
         String randomSecureTip = memberApiClient.getRandomSecureTip();
 

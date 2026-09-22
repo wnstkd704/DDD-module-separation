@@ -1,6 +1,5 @@
 package com.dddmoduleseparation.boundedContext.post.app;
 
-import com.dddmoduleseparation.boundedContext.member.domain.Member;
 import com.dddmoduleseparation.boundedContext.post.domain.Post;
 import com.dddmoduleseparation.boundedContext.post.domain.PostMember;
 import com.dddmoduleseparation.boundedContext.post.out.PostMemberRepository;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
-
 @Service
 @RequiredArgsConstructor
 public class PostFacade {
@@ -26,7 +24,7 @@ public class PostFacade {
     }
 
     @Transactional
-    public RsData<Post> write(Member author, String title, String content) {
+    public RsData<Post> write(PostMember author, String title, String content) {
         return postWriteUseCase.write(author, title, content);
     }
 
@@ -43,9 +41,15 @@ public class PostFacade {
                 member.getModifyDate(),
                 member.getUsername(),
                 "",
-                member.getNickname()
+                member.getNickname(),
+                member.getActivityScore()
         );
 
         return postMemberRepository.save(_member);
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<PostMember> findMemberByUsername(String username) {
+        return postMemberRepository.findByUsername(username);
     }
 }

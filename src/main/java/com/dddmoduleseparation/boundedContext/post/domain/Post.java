@@ -1,6 +1,5 @@
 package com.dddmoduleseparation.boundedContext.post.domain;
 
-import com.dddmoduleseparation.boundedContext.member.domain.Member;
 import com.dddmoduleseparation.global.jpa.entity.BaseIdAndTime;
 import com.dddmoduleseparation.sharde.post.dto.PostCommentDto;
 import com.dddmoduleseparation.sharde.post.event.PostCommentCreatedEvent;
@@ -25,20 +24,20 @@ import static jakarta.persistence.FetchType.LAZY;
 @Getter
 public class Post extends BaseIdAndTime {
     @ManyToOne(fetch = LAZY)
-    private Member author;
+    private PostMember author;
     private String title;
     @Column(columnDefinition = "LONGTEXT")
     private String content;
     @OneToMany(mappedBy = "post", cascade = {PERSIST, REMOVE}, orphanRemoval = true)
     private List<PostComment> comments = new ArrayList<>();
 
-    public Post(Member author, String title, String content) {
+    public Post(PostMember author, String title, String content) {
         this.author = author;
         this.title = title;
         this.content = content;
     }
 
-    public PostComment addComment(Member author, String content) {
+    public PostComment addComment(PostMember author, String content) {
         PostComment postComment = new PostComment(this, author, content);
 
         comments.add(postComment);
